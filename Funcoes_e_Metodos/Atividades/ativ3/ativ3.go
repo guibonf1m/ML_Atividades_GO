@@ -12,22 +12,22 @@ type Turma struct {
 }
 
 func (e Estudante) Exibir() string {
-	msg := fmt.Sprintf("Nome: %s, Idade %d: ", e.Nome, e.Idade)
+	msg := fmt.Sprintf("Nome: %s, Idade %d ", e.Nome, e.Idade)
 	return msg
 }
 
 func (n Turma) NomeDuplicado(nomeRecebido string) bool {
 	for _, aluno := range n.Alunos {
 		if aluno.Nome == nomeRecebido {
-			return true
+			return false
 		}
 	}
-	return false
+	return true
 }
 
 func main() {
 	var quantidade int
-	var alunosTurma Turma
+	var primeiraTurma Turma
 
 	fmt.Println("Qual a quantidade de alunos da turma: ")
 	fmt.Scanln(&quantidade)
@@ -39,26 +39,26 @@ func main() {
 		for {
 			fmt.Println("Qual é seu nome: ")
 			fmt.Scanln(&nome)
-			duplicado := alunosTurma.NomeDuplicado(nome)
+			duplicado := primeiraTurma.NomeDuplicado(nome)
 
-			if !duplicado {
+			if duplicado {
 				fmt.Println("Aluno cadastrado com sucesso!")
 				break
 			} else {
 				fmt.Println("Aluno já existe, tente outro nome!")
 			}
 		}
+
 		fmt.Println("Qual é a sua idade: ")
 		fmt.Scanln(&idade)
 
 		novoAluno := Estudante{Nome: nome, Idade: idade}
-		alunosTurma.Alunos = append(alunosTurma.Alunos, novoAluno)
+		primeiraTurma.Alunos = append(primeiraTurma.Alunos, novoAluno)
 
 	}
 
-	for _, aluno := range alunosTurma.Alunos {
+	for _, aluno := range primeiraTurma.Alunos {
 		msg := aluno.Exibir()
 		fmt.Println(msg)
-
 	}
 }

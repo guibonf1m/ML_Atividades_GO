@@ -1,10 +1,7 @@
 package main
 
 import (
-	"bufio"
 	"fmt"
-	"os"
-	"strconv"
 )
 
 type Livro struct {
@@ -92,15 +89,12 @@ func main() {
 			var titulo, autor string
 			var ano int
 
-			reader := bufio.NewReader(os.Stdin)
-
-			fmt.Print("Título: ")
-			titulo, _ = reader.ReadString('\n')
-			fmt.Print("Autor: ")
-			autor, _ = reader.ReadString('\n')
-			fmt.Print("Ano: ")
+			fmt.Println("Título: ")
+			fmt.Scanln(&titulo)
+			fmt.Println("Autor: ")
+			fmt.Scanln(&autor)
+			fmt.Println("Ano: ")
 			fmt.Scanln(&ano)
-			ano, _ = strconv.Atoi(autor)
 
 			Livro := Livro{ID: proximoID, Titulo: titulo, Ano: ano, Disponivel: true}
 			biblioteca = append(biblioteca, Livro)

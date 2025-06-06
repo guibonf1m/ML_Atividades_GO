@@ -2,6 +2,7 @@ package main
 
 import (
 	"fmt"
+	"os"
 )
 
 type Veiculo struct {
@@ -192,7 +193,13 @@ func main() {
 					fmt.Printf("Placa: %s, Abastecimento: %.2f \n", veiculo.Placa, veiculo.Abastecimentos)
 				}
 			}
+
 		case "5":
+			fmt.Println("Saindoo do programa...!")
+			os.Exit(5)
+		default:
+			fmt.Println("Opção inválida!")
+
 		}
 	}
 }

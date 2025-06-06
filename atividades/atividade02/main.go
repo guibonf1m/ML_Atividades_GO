@@ -13,17 +13,17 @@ type Livro struct {
 	Disponivel bool
 }
 
-func (e Livro) Exibir() string {
+func (l *Livro) Exibir() string {
 	disponibilidade := "Sim"
-	if !e.Disponivel {
+	if !l.Disponivel {
 		disponibilidade = "Não"
 	}
 
-	msg := fmt.Sprintf("ID: %d, Titulo %s, Quantidade %s Disponivel: %s", e.ID, e.Titulo, e.Quantidade, disponibilidade)
+	msg := fmt.Sprintf("ID: %d, Titulo %s, Quantidade %d Disponivel: %s", l.ID, l.Titulo, l.Quantidade, disponibilidade)
 	return msg
 }
 
-func (l Livro) LivroEmprestado() {
+func (l *Livro) LivroEmprestado() {
 	if l.Quantidade > 0 {
 		fmt.Println("O livro está disponivel")
 		l.Quantidade -= 1
@@ -32,9 +32,9 @@ func (l Livro) LivroEmprestado() {
 	}
 }
 
-func (d Livro) LivroDevolvido() {
-	d.Quantidade += 1
-	fmt.Println("Livro devolvido com sucesso:", d.Quantidade)
+func (l *Livro) LivroDevolvido() {
+	l.Quantidade += 1
+	fmt.Println("Livro devolvido com sucesso:", l.Quantidade)
 }
 
 func listar(biblioteca []Livro) {

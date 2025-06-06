@@ -11,13 +11,13 @@ type Turma struct {
 	Alunos []Estudante
 }
 
-func (e Estudante) Exibir() string {
-	msg := fmt.Sprintf("Nome: %s, Idade %d ", e.Nome, e.Idade)
+func (t Estudante) Exibir() string {
+	msg := fmt.Sprintf("Nome: %s, Idade %d ", t.Nome, t.Idade)
 	return msg
 }
 
-func (n Turma) NomeDuplicado(nomeRecebido string) bool {
-	for _, aluno := range n.Alunos {
+func (t Turma) NomeDuplicado(nomeRecebido string) bool {
+	for _, aluno := range t.Alunos {
 		if aluno.Nome == nomeRecebido {
 			return false
 		}

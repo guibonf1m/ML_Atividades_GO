@@ -19,18 +19,18 @@ func (f *Frota) AdicionarVeiculo(veiculo Veiculo) {
 	f.TodosVeiculos = append(f.TodosVeiculos, veiculo)
 }
 
-func (f Frota) ListarVeiculos() []Veiculo {
+func (f *Frota) ListarVeiculos() []Veiculo {
 	return f.TodosVeiculos
 }
 
-func (f Frota) ValidarAno(AnoRecebido int) bool {
+func (f *Frota) ValidarAno(AnoRecebido int) bool {
 	if AnoRecebido >= 1900 && AnoRecebido <= 2025 {
 		return true
 	}
 	return false
 }
 
-func (f Frota) PlacaExiste(placaRecebida string) bool {
+func (f *Frota) PlacaExiste(placaRecebida string) bool {
 	for _, veiculo := range f.TodosVeiculos {
 		if veiculo.Placa == placaRecebida {
 			return true
@@ -41,28 +41,29 @@ func (f Frota) PlacaExiste(placaRecebida string) bool {
 
 // Tenta registrar um novo abastecimento ao veículo pela placa.
 // Valida placa e valor. Se tudo certo, adiciona ao slice de abastecimentos.
-func (f Frota) RegistrarAbastecimento(placaRecebida string, valor float64) {
+func (f *Frota) RegistrarAbastecimento(placaRecebida string, valor float64) {
 	if !f.PlacaExiste(placaRecebida) {
 		fmt.Printf("Placa não cadastrada: %s", placaRecebida)
 		return
 	}
+
 	if valor <= 0 {
 		fmt.Println("O valor do abastecimento deve ser maior que 0")
+		return
 	}
-	return
 
 	// Percorre todos os veículos da frota para encontrar o correto.
 	for i, v := range f.TodosVeiculos {
 		if v.Placa == placaRecebida {
 			// Adiciona o valor ao slice de abastecimentos do veículo encontrado.
 			f.TodosVeiculos[i].Abastecimentos = append(f.TodosVeiculos[i].Abastecimentos, valor)
+			fmt.Printf("O abastecimento de %.2f no veículo %s foi feito com sucesso!", valor, placaRecebida)
+			return
 		}
 	}
-
-	fmt.Printf("O abastecimento de %.2f no veículo %s foi feito com sucesso!", placaRecebida, valor)
 }
 
-func (f Frota) ResumoAbastecimento() []Veiculo {
+func (f *Frota) ResumoAbastecimento() []Veiculo {
 	return f.TodosVeiculos
 }
 
